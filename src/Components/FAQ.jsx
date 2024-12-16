@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 
 const faqs = [
-
 	{
 		question: "How do I enroll for classes?",
 		answer: "You can enroll by visiting our website and signing up.",
@@ -71,5 +70,4 @@ const FAQ = () => {
     </div>
   );
 };
-
 export default FAQ;
