@@ -1,20 +1,26 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const advertisementSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    trim: true,
   },
   description: {
     type: String,
     required: true,
+    trim: true,
   },
-  image: {
+  imageUrl: {
     type: String,
     required: true,
+    trim: true,
   },
-}, { timestamps: true });
+  createdAt: {
+    type: Date,
+    default: Date.now, // Automatically set to current date/time
+  },
+});
 
 const Advertisement = mongoose.model('Advertisement', advertisementSchema);
-
-module.exports = Advertisement;
+export default Advertisement;

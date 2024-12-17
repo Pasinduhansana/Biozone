@@ -6,7 +6,7 @@ exports.addAdvertisement = async (req, res) => {
     const { title, description } = req.body;
    
 
-    const advertisement = new Advertisement({ title, description, image });
+    const advertisement = new Advertisement({ title, description, imageUrl });
 
     await advertisement.save();
     res.status(201).json({ message: 'Advertisement added successfully', advertisement });
