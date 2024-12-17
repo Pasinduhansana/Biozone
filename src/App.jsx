@@ -8,6 +8,7 @@ import Advertisement from "./Components/Advertisement";
 import Admin from "./Pages/Admin/Admin";
 import Landing from "./Components/Landing";
 import Login from "./Pages/Admin/Login";
+import ContactUs from "./Components/ContactUs";
 
 function App() {
 	return (
@@ -24,6 +25,5 @@ function App() {
 				</Routes>
 			</div>
 		</BrowserRouter>
-	);
-}
+
 export default App;

@@ -2,10 +2,23 @@ import React, { useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 
 const faqs = [
-  { question: "How do I enroll for classes?", answer: "You can enroll by visiting our website and signing up." },
-  { question: "How are classes conducted?", answer: "Classes are conducted online through live video sessions." },
-  { question: "Can I download course materials?", answer: "Yes, course materials are available for download after enrollment." },
-  { question: "How do I pay for a class?", answer: "You can pay via credit card, PayPal, or bank transfer." },
+	{
+		question: "How do I enroll for classes?",
+		answer: "You can enroll by visiting our website and signing up.",
+	},
+	{
+		question: "How are classes conducted?",
+		answer: "Classes are conducted online through live video sessions.",
+	},
+	{
+		question: "Can I download course materials?",
+		answer:
+			"Yes, course materials are available for download after enrollment.",
+	},
+	{
+		question: "How do I pay for a class?",
+		answer: "You can pay via credit card, PayPal, or bank transfer.",
+	},
 ];
 
 const FAQ = () => {
@@ -57,5 +70,4 @@ const FAQ = () => {
     </div>
   );
 };
-
 export default FAQ;
