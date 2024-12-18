@@ -3,11 +3,11 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import FAQ from "./Components/FAQ";
+
 import Advertisement from "./Components/Advertisement";
 import Admin from "./Pages/Admin/Admin";
-import Landing from "./Components/Landing";
 import Login from "./Pages/Admin/Login";
+import PrivateRoute from "./Utils/PrivateRoute";
 
 function App() {
 	return (
@@ -20,7 +20,13 @@ function App() {
 
 					{/* Admin Routes */}
 					<Route path="/admin" element={<Login />} />
-					<Route path="/admin/dashboard" element={<Admin />} />
+					<Route element={<PrivateRoute />} >
+						<Route path="/admin/dashboard" element={<Admin />} />
+					</Route>
+
+					<Route path="*" element={<><div className="flex justify-center items-center h-screen">
+						<h1 className="text-2xl font-bold">404 - Page Not Found</h1>
+					</div></>} />
 				</Routes>
 			</div>
 		</BrowserRouter>

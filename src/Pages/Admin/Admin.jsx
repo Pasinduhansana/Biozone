@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {  useNavigate } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 
 const Admin = () => {
@@ -11,6 +12,8 @@ const Admin = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [advertisements, setAdvertisements] = useState([]);
+
+  const navigate = useNavigate();
 
   // Reusable function to fetch advertisements
   const fetchAdvertisements = async () => {
@@ -88,8 +91,6 @@ const Admin = () => {
         setTitle("");
         setDescription("");
         setUploadProgress(0);
-
-        // Refresh advertisements after upload
         fetchAdvertisements();
       } else {
 
@@ -112,8 +113,6 @@ const Admin = () => {
       if (response.status === 200) {
 
         toast.success("Advertisement deleted successfully!");
-
-        // Refresh advertisements after delete
         fetchAdvertisements();
       } else {
         toast.error("Failed to delete the advertisement.");
@@ -125,16 +124,28 @@ const Admin = () => {
     }
   };
 
+  //  Logout
+  const handleLogout = () => {
+
+    localStorage.removeItem("adminToken");
+    navigate("/admin");
+    toast.success("Logged out successfully!");
+  };
+
   return (
     <div className="p-8 min-h-screen font-sans">
+      {/* Logout */}
+      <div className="grid justify-items-end m-3"> <button onClick={handleLogout} className="bg-[#d43437] p-2 text-stone-100 rounded-md">
+        Logout
+        </button></div>
       {/* Header */}
-      <h1 className="p-18 text-5xl font-medium text-center bg-gradient-to-r from-primary1 to-primary2 text-transparent bg-clip-text">
+      <h1 className="lg:p-18 lg:text-5xl text-3xl font-medium text-center bg-gradient-to-r from-primary1 to-primary2 text-transparent bg-clip-text">
         Admin Panel - Upload Advertisement
       </h1>
 
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left side */}
-        <div className="lg:w-1/2 bg-white rounded-lg shadow-md p-6">
+        <div className="lg:w-1/2  rounded-lg shadow-md p-6">
           <h2 className="text-lg font-semibold text-center bg-gradient-to-r from-primary1 to-primary2 text-transparent bg-clip-text mb-4">
             Upload Advertisement
           </h2>
@@ -241,36 +252,38 @@ const Admin = () => {
           </h2>
 
           {/* Table */}
-          <table className="min-w-full table-auto border-collapse">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 text-left border-b">Created At</th>
-                <th className="px-4 py-2 text-left border-b">Title</th>
-                <th className="px-4 py-2 text-left border-b">Image</th>
-                <th className="px-4 py-2 text-left border-b">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {advertisements.map((ad) => (
-                <tr key={ad._id}>
-                  <td className="px-4 py-2 border-b">{new Date(ad.createdAt).toLocaleString()}</td>
-                  <td className="px-4 py-2 border-b">{ad.title}</td>
-                  <td className="px-4 py-2 border-b">
-                    <img src={ad.imageUrl} alt={ad.title} className="w-16 h-16 object-cover rounded-lg" />
-                  </td>
-                  <td className="px-4 py-2 border-b">
-                    <button
-
-                      onClick={() => handleDelete(ad._id)}
-
-                    >
-                      <MdDeleteOutline style={{ color: "#EE7F80", fontSize: "34px" }} />
-                    </button>
-                  </td>
+          <div className="overflow-auto ">
+            <table className="min-w-1/2 table-auto border-collapse">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 text-left border-b">Created At</th>
+                  <th className="px-4 py-2 text-left border-b">Title</th>
+                  <th className="px-4 py-2 text-left border-b">Image</th>
+                  <th className="px-4 py-2 text-left border-b">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {advertisements.map((ad) => (
+                  <tr key={ad._id}>
+                    <td className="px-4 py-2 border-b">{new Date(ad.createdAt).toLocaleString()}</td>
+                    <td className="px-4 py-2 border-b">{ad.title}</td>
+                    <td className="px-4 py-2 border-b">
+                      <img src={ad.imageUrl} alt={ad.title} className="w-16 h-16 object-cover rounded-lg" />
+                    </td>
+                    <td className="px-4 py-2 border-b">
+                      <button
+
+                        onClick={() => handleDelete(ad._id)}
+
+                      >
+                        <MdDeleteOutline style={{ color: "#EE7F80", fontSize: "34px" }} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
