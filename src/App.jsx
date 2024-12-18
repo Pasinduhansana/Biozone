@@ -6,13 +6,13 @@ import ContactUs from "./Components/ContactUs";
 import AboutUs from "./Components/AboutUs";
 
 function App() {
-	return (
-		<div className="App bg-primarybg text-primarytext">
-			{/* <Landing />
-			<FAQ /> */}
-			{/* <ContactUs/> */}
-			<AboutUs/>
-		</div>
-	);
+  return (
+    <div className="App bg-primarybg text-primarytext">
+      {/* <Landing />
+      <ContactUs /> */}
+	  <AboutUs/>
+    </div>
+  );
 }
+
 export default App;
