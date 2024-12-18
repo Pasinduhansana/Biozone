@@ -1,6 +1,4 @@
 import React from 'react';
-import BackgroundGradientAnimation from './Component/BackgroundGradientAnimation'; // Adjust the path if needed
-
 const AboutUs = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center px-4 py-4 bg-cover bg-center">
