@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 
 const Admin = () => {
@@ -106,38 +106,89 @@ const Admin = () => {
   };
 
   const handleDelete = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3080/api/admin/delete/${id}`
-      );
-      if (response.status === 200) {
-
-        toast.success("Advertisement deleted successfully!");
-        fetchAdvertisements();
-      } else {
-        toast.error("Failed to delete the advertisement.");
-      }
-    } catch (error) {
-      console.error("Error deleting advertisement:", error);
-      toast.error("An error occurred while deleting. Please try again.");
-
-    }
+    toast(
+      (t) => (
+        <div className="flex flex-col items-center space-y-2">
+          <p className="text-sm font-medium">Are you sure you want to delete this advertisement?</p>
+          <div className="flex space-x-4">
+            {/* Yes Button */}
+            <button
+              onClick={async () => {
+                toast.dismiss(t.id); // Dismiss the confirmation toast
+                try {
+                  const response = await axios.delete(
+                    `http://localhost:3080/api/admin/delete/${id}`
+                  );
+                  if (response.status === 200) {
+                    toast.success("Advertisement deleted successfully!");
+                    fetchAdvertisements();
+                  } else {
+                    toast.error("Failed to delete the advertisement.");
+                  }
+                } catch (error) {
+                  console.error("Error deleting advertisement:", error);
+                  toast.error("An error occurred while deleting. Please try again.");
+                }
+              }}
+              className="bg-red-500 text-white px-4 py-2 rounded-md"
+            >
+              Yes
+            </button>
+            {/* No Button */}
+            <button
+              onClick={() => toast.dismiss(t.id)} // Dismiss the toast without deleting
+              className="bg-gray-300 px-4 py-2 rounded-md"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      ),
+      { duration: 5000 } // Toast will auto-dismiss after 5 seconds
+    );
   };
-
-  //  Logout
+  //  Logout with comformation button
   const handleLogout = () => {
+    toast(
+      (t) => (
+        <div className="flex flex-col items-center space-y-2">
+          <p className="text-sm font-medium">Are you sure you want to log out?</p>
+          <div className="flex space-x-4">
+            {/* Yes Button */}
+            <button
+              onClick={() => {
+                toast.dismiss(t.id);
 
-    localStorage.removeItem("adminToken");
-    navigate("/admin");
-    toast.success("Logged out successfully!");
+                localStorage.removeItem("adminToken");
+                navigate("/admin");
+                toast.success("Logged out successfully!");
+              }}
+              className="bg-red-500 text-white px-4 py-2 rounded-md"
+            >
+              Yes
+            </button>
+            {/* No Button */}
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="bg-gray-300 px-4 py-2 rounded-md"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      ),
+      { duration: 5000 }
+    );
   };
+
+
 
   return (
     <div className="p-8 min-h-screen font-sans">
       {/* Logout */}
       <div className="grid justify-items-end m-3"> <button onClick={handleLogout} className="bg-[#d43437] p-2 text-stone-100 rounded-md">
         Logout
-        </button></div>
+      </button></div>
       {/* Header */}
       <h1 className="lg:p-18 lg:text-5xl text-3xl font-medium text-center bg-gradient-to-r from-primary1 to-primary2 text-transparent bg-clip-text">
         Admin Panel - Upload Advertisement
@@ -246,43 +297,51 @@ const Admin = () => {
         </div>
 
         {/* Right side*/}
-        <div className="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6">
+        <div className="w-full lg:w-1/2 bg-white rounded-lg shadow-md lg:p-6">
           <h2 className="text-lg font-semibold text-center bg-gradient-to-r  from-primary1 to-primary2  text-transparent bg-clip-text mb-4">
             Advertisements Details
           </h2>
 
           {/* Table */}
-          <div className="overflow-auto ">
-            <table className="min-w-1/2 table-auto border-collapse">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 text-left border-b">Created At</th>
-                  <th className="px-4 py-2 text-left border-b">Title</th>
-                  <th className="px-4 py-2 text-left border-b">Image</th>
-                  <th className="px-4 py-2 text-left border-b">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {advertisements.map((ad) => (
-                  <tr key={ad._id}>
-                    <td className="px-4 py-2 border-b">{new Date(ad.createdAt).toLocaleString()}</td>
-                    <td className="px-4 py-2 border-b">{ad.title}</td>
-                    <td className="px-4 py-2 border-b">
-                      <img src={ad.imageUrl} alt={ad.title} className="w-16 h-16 object-cover rounded-lg" />
-                    </td>
-                    <td className="px-4 py-2 border-b">
-                      <button
+          <div className="flex flex-col w-full space-y-4">
 
-                        onClick={() => handleDelete(ad._id)}
-
-                      >
-                        <MdDeleteOutline style={{ color: "#EE7F80", fontSize: "34px" }} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="flex justify-between bg-gray-100 p-4 rounded-t-lg text-sm font-medium text-gray-600">
+              <div className="w-1/3">Image</div>
+              <div className="w-1/3">Title</div>
+              <div className="w-1/3">Actions</div>
+            </div>
+            {advertisements.map((ad, index) => (
+              <div
+                key={ad._id}
+                className={`flex  lg:flex-row items-center lg:items-stretch w-full bg-white p-1 lg:p-4 rounded-lg shadow-sm `}
+              >
+                <div className="flex w-full lg:w-1/3 justify-center lg:justify-start mb-4 lg:mb-0">
+                  <img
+                    src={ad.imageUrl}
+                    alt={ad.title}
+                    className="w-16 h-16 object-cover rounded-lg shadow-md"
+                  />
+                </div>
+                <div className="flex flex-col w-full lg:w-1/3 lg:text-left space-y-2">
+                  <div className="text-sm font-semibold text-gray-700">{ad.title}</div>
+                  <div className="text-xs font-light text-gray-500">
+                    {new Date(ad.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "2-digit",
+                    })}
+                  </div>
+                </div>
+                <div className=" w-full lg:w-1/3 justify-center lg:justify-end">
+                  <button
+                    onClick={() => handleDelete(ad._id)}
+                    className="p-2 rounded-full hover:bg-red-100 transition"
+                  >
+                    <MdDeleteOutline style={{ color: "#EE7F80", fontSize: "24px" }} />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
