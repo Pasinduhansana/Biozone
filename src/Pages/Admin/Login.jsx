@@ -1,27 +1,41 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import toast from "react-hot-toast";
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //credentials check
-    if (username === 'admin@email.com' && password === 'Admin') {
-      navigate('/admin/dashboard'); 
-    } else {
-      toast.error('Invalid credentials. Please try again.');
+    try {
+      const response = await axios.post('http://localhost:3080/api/auth/admin/login', {
+        email: username,
+        password: password,
+      });
+
+      if (response.status === 200) {
+         localStorage.setItem("adminToken", response.data.token); // Store token
+         toast.success("Login successful!");
+         navigate("/admin/dashboard");
+      }
+    } catch (error) {
+      // check invalid credentials
+      if (error.response && error.response.status === 401) {
+        toast.error('Invalid credentials. Please try again.');
+      } else {
+        toast.error('Something went wrong. Please try again later.');
+      }
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-md p-2 pace-y-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center text-primary1">
           Admin Login
         </h2>
         <form className="space-y-4" onSubmit={handleSubmit}>

@@ -24,37 +24,47 @@ const Advertisement = () => {
   }, []);
 
   // Image array
-  const images = advertisements.map((ad) => ad.imageUrl);  
+  const images = advertisements.map((ad) => ad.imageUrl);
   if (images.length === 0) {
     return <div>Loading...</div>;
   }
 
   // Calculate the visible images with the last image first
   const visibleImages = [
-    images[(currentIndex - 1 + images.length) % images.length], 
+    images[(currentIndex - 1 + images.length) % images.length],
     images[currentIndex],
     images[(currentIndex + 1) % images.length],
   ];
 
   // Navigate to the previous image
   const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  // Navigate to the next image
+  const goToNext = () => {
+
     setCurrentIndex((prevIndex) =>
       (prevIndex - 1 + images.length) % images.length
     );
   };
 
-  // Navigate to the next image
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
   return (
     <div className="container relative w-full mx-auto">
-      <div className="text-center p-10">
-        <h1 className="text-5xl font-medium text-center bg-gradient-to-r from-primary1 to-primary2 text-transparent bg-clip-text">
-          Advertisement
-        </h1>
+      <div className="text-center lg:p-10 p-3">
+        <div className="flex flex-col items-center justify-center">
+          <div className="bg-gradient-to-r from-primary1 to-primary2 text-transparent bg-clip-text p-3">
+            Highlights
+          </div>
+          <div className="lg:text-5xl text-2xl font-semibold mt-3">
+            Featuring Key Highlights
+          </div>
+          <div className="content-center flex lg:w-3/4 font-normal text-[#7d7d7d] p-2 mt-3">
+            Discover the latest highlights, schedules, and topics from our classes. These showcase important events, learning opportunities, and updates for students.
+          </div>
+        </div>
       </div>
+
       <div className="flex items-center justify-center">
         <button onClick={goToPrevious} className=" top-1/2 left-0">
           <VscChevronLeft style={{ color: "gray", fontSize: "34px" }} />
@@ -63,13 +73,12 @@ const Advertisement = () => {
           {visibleImages.map((image, index) => (
             <div
               key={index}
-              className={`w-1/3 transition-all duration-300 ${
-                index === 0
-                  ? "mt-36"
+              className={`w-1/3 transition-all duration-300 ${index === 0
+                  ? "scale-75"
                   : index === 1
-                  ? "mb-10" 
-                  : "mt-36" 
-              }`}
+                    ? ""
+                    : "scale-75"
+                }`}
             >
               <div className="m-5">
                 <img
