@@ -2,23 +2,22 @@ import React, { useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 
 const faqs = [
-	{
-		question: "How do I enroll for classes?",
-		answer: "You can enroll by visiting our website and signing up.",
-	},
-	{
-		question: "How are classes conducted?",
-		answer: "Classes are conducted online through live video sessions.",
-	},
-	{
-		question: "Can I download course materials?",
-		answer:
-			"Yes, course materials are available for download after enrollment.",
-	},
-	{
-		question: "How do I pay for a class?",
-		answer: "You can pay via credit card, PayPal, or bank transfer.",
-	},
+  {
+    question: "How do I enroll for classes?",
+    answer: "You can enroll by visiting our website and signing up.",
+  },
+  {
+    question: "How are classes conducted?",
+    answer: "Classes are conducted online through live video sessions.",
+  },
+  {
+    question: "Can I download course materials?",
+    answer: "Yes, course materials are available for download after enrollment.",
+  },
+  {
+    question: "How do I pay for a class?",
+    answer: "You can pay via credit card, PayPal, or bank transfer.",
+  },
 ];
 
 const FAQ = () => {
@@ -29,45 +28,72 @@ const FAQ = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10">
-      <h2 className="text-2xl sm:text-3xl font-bold text-center text-primary2 mb-4">
-        Frequently Asked Questions
-      </h2>
-      <p className="text-gray-600 text-center mb-10 pt-4">
-        From foundational concepts to advanced topics, we're here to help you learn and grow your knowledge about the wonders of life.
-      </p>
+    <div
+      className="min-h-screen bg-cover flex items-center justify-center px-4 overflow-y-auto"
+      style={{
+        backgroundImage: `
+          linear-gradient(to right, rgba(255, 255, 255, 0.7) 30%, transparent 70%),
+          url('src/Assest/Web_Images/Bg Plexus.png')
+        `,
+        backgroundPosition: '-450px 180px', // x = -450px, y = 180px
+        backgroundRepeat: 'no-repeat', // Prevents image repetition
+        backgroundSize: 'cover', // Ensures the image covers the entire container
+      }}
+    >
+      <div className="w-full max-w-3xl">
+        {/* Header */}
+        <div className="text-center">
+          <p className="text-green-600 font-reddit uppercase text-sm font-semibold mb-3">
+            Support
+          </p>
+          <h2 className="text-[48px] text-primarytext mb-2 font-reddit">
+            Frequently asked questions
+          </h2>
+          <p className="text-gray-500 mb-10 font-sans">
+            Can’t find the answer you’re looking for? Please{" "}
+            <a href="#" className="text-gray-500 underline">
+              chat with our friendly team.
+            </a>
+          </p>
+        </div>
 
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div key={index} className="border-b border-gray-300">
-            <button
-              className="w-full flex justify-between items-center py-5 text-left focus:outline-none"
-              onClick={() => toggleFAQ(index)}
-            >
-              <span className="text-base sm:text-lg font-medium text-gray-700 text-center sm:text-left flex-1">
-                {faq.question}
-              </span>
-              <span
-                className={`text-2xl sm:text-3xl text-gray-500 transition-transform duration-500 ease-in-out ${
-                  openIndex === index ? "rotate-180" : ""
+        {/* FAQ Section */}
+        <div className="space-y-4 pb-20">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border-b border-gray-300">
+              {/* Question */}
+              <button
+                className="w-full flex justify-between items-center py-4 text-left focus:outline-none"
+                onClick={() => toggleFAQ(index)}
+              >
+                <span className="text-lg font-medium text-gray-700">
+                  {faq.question}
+                </span>
+                <span
+                  className={`text-2xl text-gray-500 transform transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
+                >
+                  <IoChevronDownOutline />
+                </span>
+              </button>
+
+              {/* Answer */}
+              <div
+                className={`text-gray-600 overflow-hidden transition-all duration-500 ${
+                  openIndex === index
+                    ? "max-h-40 opacity-100"
+                    : "max-h-0 opacity-0"
                 }`}
               >
-                <IoChevronDownOutline />
-              </span>
-            </button>
-            <div
-              className={`pb-4 text-gray-600 transition-all duration-500 ease-in-out ${
-                openIndex === index
-                  ? "max-h-[400px] opacity-100 overflow-auto sm:text-left text-center"
-                  : "max-h-0 opacity-0 overflow-hidden"
-              }`}
-            >
-              {faq.answer}
+                <p className="pb-4">{faq.answer}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
 };
+
 export default FAQ;

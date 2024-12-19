@@ -5,138 +5,168 @@ import { IoMapOutline } from "react-icons/io5";
 import { IoEarth } from "react-icons/io5";
 import bgimage from "../Assest/Web_Images/Bg Plexus.png";
 
+// SubmitButton Component
+const SubmitButton = ({ TextContent }) => {
+  return (
+    <div className="flex items-center justify-center">
+      <button className="text-primarytextwhite bg-gradient-to-r from-primary1 to-primary2 hover:scale-[1.02] rounded-[5px] h-[50px] w-[145px] hover:text-white transition-all duration-200">
+        {TextContent}
+      </button>
+    </div>
+  );
+};
+
+const SecondarySubmitButton = ({ TextContent }) => {
+  return (
+    <div className="flex items-center justify-center">
+      <button className="text-primary1 border-2 bg-white border-primary1 hover:scale-[1.02] rounded-[5px] h-[48px] w-[145px] hover:text-primaryHover2 transition-all duration-200">
+        {TextContent}
+      </button>
+    </div>
+  );
+};
+
+const SecondarySubmitButton1 = ({ TextContent }) => {
+  return (
+    <div className="flex items-center justify-center">
+      <button className="text-primary1 border-2 bg-white border-primary1 hover:scale-[1.02] rounded-[5px] h-[48px] w-[298px] hover:text-primaryHover2 transition-all duration-200">
+        {TextContent}
+      </button>
+    </div>
+  );
+};
+
 const ContactUs = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center ">
-
-		<img
-						src={bgimage}
-						alt="Background DNA sample"
-						className="absolute left-0 bottom-0 -z-10"
-					/>
+    <div className="min-h-screen flex items-center justify-center">
       {/* Container */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-10 px-6 py-12 max-w-7xl mx-auto">
         {/* Left Side: Contact Form */}
-        <div className="w-full md:w-1/2">
-          <p className="text-gray-500 text-sm md:text-base mb-6 leading-relaxed">
-            At BioZone, we’re happy to help with any inquiries or feedback.
-            Please fill out the form below, and we’ll get back to you as soon as
-            possible!
+        <div className="w-full md:w-1/3">
+          <p className="text-gray-500 text-[20px] font-sans md:text-base mb-8 text-center" style={{ lineHeight: '1.8' }}>
+            At BioZone, we’re happy to help with any inquiries or feedback. Please fill
+            out the form below, and we’ll get back to you as soon as possible!
           </p>
+
           <form className="space-y-6">
             {/* Input Fields */}
-            <div className="border border-green-400 rounded-md p-2">
-              <input
-                type="text"
-                placeholder="Enter your name"
-                className="w-full focus:outline-none placeholder-gray-500"
-              />
+            <div className="relative">
+              <label className="absolute left-2 top-[-15px] px-2 bg-white text-black-500 text-[17px]">
+                Enter your name
+              </label>
+              <div className="border border-primary1 rounded-md p-2">
+                <input type="text" placeholder="" className="w-full focus:outline-none placeholder-transparent" />
+              </div>
             </div>
 
-            <div className="border border-green-400 rounded-md p-2">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="w-full focus:outline-none placeholder-gray-500"
-              />
+            <div className="relative">
+              <label className="absolute left-2 top-[-15px] px-2 bg-white text-black-500 text-[17px]">
+                Enter your email address
+              </label>
+              <div className="border border-primary1 rounded-md p-2">
+                <input type="email" placeholder="" className="w-full focus:outline-none placeholder-transparent" />
+              </div>
             </div>
 
-            <div className="border border-green-400 rounded-md p-2">
-              <input
-                type="text"
-                placeholder="Subject"
-                className="w-full focus:outline-none placeholder-gray-500"
-              />
+            <div className="relative">
+              <label className="absolute left-2 top-[-15px] px-2 bg-white text-black-500 text-[17px]">
+                Subject
+              </label>
+              <div className="border border-primary1 rounded-md p-2">
+                <input type="text" placeholder="" className="w-full focus:outline-none placeholder-transparent" />
+              </div>
             </div>
 
-            <div className="border border-green-400 rounded-md p-2">
-              <textarea
-                rows="4"
-                placeholder="Message"
-                className="w-full focus:outline-none placeholder-gray-500"
-              ></textarea>
+            <div className="relative">
+              <label className="absolute left -2 top-[-15px] px-4 bg-white text-black-500 text-[17px]">
+                Message
+              </label>
+              <div className="border border-primary1 rounded-md p-3">
+                <textarea type="text" rows="4" className="w-full focus:outline-none placeholder-transparent" />
+              </div>
             </div>
 
             {/* Buttons */}
-            <div className="flex gap-4">
-              <button
-                type="reset"
-                className="px-6 py-2 border-2 border-green-400 rounded text-green-400 hover:bg-green-50 transition"
-              >
-                Clear
-              </button>
-              <button
-                type="submit"
-                className="px-6 py-2 bg-primary2 text-white rounded hover:bg-primary1 transition"
-              >
-                Submit
-              </button>
+            <div className="flex justify-end gap-5 ">
+              {/* Use SubmitButton for Clear and Submit */}
+              <SecondarySubmitButton TextContent="Clear" />
+              <SubmitButton TextContent="Submit" />
             </div>
           </form>
         </div>
 
-      {/* Divider */}
-<div className="hidden md:block border-l-2 border-dashed border-primary2 self-stretch"></div>
-
-
+       {/* Divider */}
+<div className="hidden md:block border-l-2 border-dashed border-primary2 self-stretch h-screen opacity-40"></div> {/* Adjust opacity here */}
 
         {/* Right Side: Contact Options */}
         <div className="w-full md:w-1/2">
-        <h2 className="text-primary2 text-6xl md:text-6xl font-bold -mt-6 mb-8">Get in touch</h2>
-          <p className="text-gray-500 mb-9 pb-5">
-            At BioZone, we’re here to assist you with any questions or feedback.
-            Reach out to us - we’d love to hear from you!
+          <h2 className="text-primary2 text-5xl md:text-6xl font-reddit mb-5">Get in touch</h2>
+          <p className="text-gray-500 mb-4 pb-5">
+            At BioZone, we’re here to assist you with any questions or feedback. Reach out to us - we’d love to hear from you!
           </p>
 
-          {/* Contact Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            {/* Card 1 */}
-            <div className="bg-white shadow-md rounded-md p-4 flex items-center gap-4">
-              <span className="text-primary1 text-3xl"><IoMailOutline/></span>
-              <div>
-                <p className="text-gray-700 font-semibold">Email Us</p>
-                <p className="text-gray-500 text-sm">hello@biozone.lk</p>
-              </div>
-            </div>
+         {/* Contact Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-9">
+             {/* Card 1 */}
+          <div className="bg-white shadow-md rounded-md p-10 flex items-center gap-6 relative h-32 w-60 "> {/* Adjust the width with w-64 or any other value */}
+    <span className="text-primary1 text-3xl absolute top-5 left-3">
+      <IoMailOutline />
+    </span>
+
+    <div className="absolute bottom-6 left-3">
+      <p className="text-gray-700 font-semibold">Email Us</p>
+      <p className="text-gray-500 text-sm">hello@biozone.lk</p>
+    </div>
+  </div>
+
 
             {/* Card 2 */}
-            <div className="bg-white shadow-md rounded-md p-4 flex items-center gap-4">
-              <span className="text-primary1 text-3xl"><IoCallOutline/></span>
-              <div>
-                <p className="text-gray-700 font-semibold">Call Us</p>
-                <p className="text-gray-500 text-sm">+1 (234) 567-890</p>
-              </div>
+            <div className="bg-white shadow-md rounded-md p-10 flex items-center gap-6 relative h-32 w-60"> {/* Adjust the width with w-64 or any other value */}
+            <span className="text-primary1 text-3xl absolute top-5 left-3">
+                <IoCallOutline />
+              </span>
+              <div className="absolute bottom-6 left-3">
+      <p className="text-gray-700 font-semibold">Call Us</p>
+      <p className="text-gray-500 text-sm">+1 (234) 567-890</p>
+    </div>
+              
             </div>
+
+
 
             {/* Card 3 */}
-            <div className="bg-white shadow-md rounded-md p-4 flex items-center gap-4">
-              <span className="text-primary1 text-3xl"><IoMapOutline /></span>
-              <div>
-                <p className="text-gray-700 font-semibold">Visit Us</p>
-                <p className="text-gray-500 text-sm">
-                  Colombo 03, Kollupitiya
-                </p>
-              </div>
+            <div className="bg-white shadow-md rounded-md p-10 flex items-center gap-6 relative h-32 w-60"> {/* Adjust the width with w-64 or any other value */}
+            <span className="text-primary1 text-3xl absolute top-5 left-3">
+            <IoMapOutline />
+              </span>
+              <div className="absolute bottom-6 left-3">
+      <p className="text-gray-700 font-semibold">Visit Us</p>
+      <p className="text-gray-500 text-sm">Colombo 03, Kollupitiya</p>
+    </div>
+              
             </div>
 
-            {/* Card 4 */}
-            <div className="bg-white shadow-md rounded-md p-4 flex items-center gap-4">
-              <span className="text-primary1 text-3xl"><IoEarth /></span>
-              <div>
-                <p className="text-gray-700 font-semibold">Website</p>
-                <p className="text-gray-500 text-sm">www.biozone.lk</p>
-              </div>
+
+           {/* Card 4 */}
+           <div className="bg-white shadow-md rounded-md p-10 flex items-center gap-6 relative w-60"> {/* Adjust the width with w-64 or any other value */}
+            <span className="text-primary1 text-3xl absolute top-5 left-3">
+            <IoEarth />
+              </span>
+              <div className="absolute bottom-6 left-3">
+      <p className="text-gray-700 font-semibold">Website</p>
+      <p className="text-gray-500 text-sm">www.biozone.lk</p>
+    </div>
+              
             </div>
           </div>
+         
+
+
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button className="w-full sm:w-auto px-6 py-2 border-2 border-primary2 text-primary2 rounded hover:bg-primary1 hover:text-primarytextwhite transition">
-              Chat on Whatsapp
-            </button>
-            <button className="w-full sm:w-auto px-6 py-2 border-2 border-primary2 text-primary2 rounded hover:bg-primary1 hover:text-primarytextwhite transition">
-              Access to Telegram Group
-            </button>
+          <div className="flex flex-col sm:flex-row gap-6 w-full">
+            <SecondarySubmitButton1 TextContent="Chat on Whatsapp" />
+            <SecondarySubmitButton1 TextContent="Access to Telegram Group" />
           </div>
         </div>
       </div>

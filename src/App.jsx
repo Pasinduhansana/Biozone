@@ -8,9 +8,11 @@ import AboutUs from "./Components/AboutUs";
 function App() {
   return (
     <div className="App bg-primarybg text-primarytext">
-      {/* <Landing />
-      <ContactUs /> */}
-	  <AboutUs/>
+      {/* <Landing />*/}
+      
+	  {/* <AboutUs/> */}
+    {/* <FAQ/> */}
+    <ContactUs />  
     </div>
   );
 }
