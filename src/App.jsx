@@ -8,18 +8,21 @@ import Advertisement from "./Components/Advertisement";
 import Admin from "./Pages/Admin/Admin";
 import Login from "./Pages/Admin/Login";
 import PrivateRoute from "./Utils/PrivateRoute";
-import ContactUs from "./Components/ContactUs";
-import AboutUs from "./Components/AboutUs";
-
+import Map from "./Components/Map";
 
 function App() {
 	return (
-		// <BrowserRouter>
-		// 	<Toaster position="top-center" containerStyle={{ top: 60 }} />
+		<BrowserRouter>
+			<Toaster position="top-center" containerStyle={{ top: 60 }} />
 
-		// 	<div className="App bg-primarybg text-primarytext">
-		// 		<Routes>
-		// 			<Route path="/" element={<Advertisement />} />
+			<div className="App bg-primarybg text-primarytext">
+				<Routes>
+					<Route path="/" element={
+						<>
+							<Map />
+							<Advertisement />
+						</>
+					} />
 
 					{/* Admin Routes */}
 					<Route path="/admin" element={<Login />} />
@@ -28,12 +31,11 @@ function App() {
 					</Route>
 
 					<Route path="*" element={<><div className="flex justify-center items-center h-screen">
-						<h1 className="text-2xl font-bold">404 - Page Not Found</h1>
+						<h1 className="text-1xl font-thin font-mono">404 - Page Not Found</h1>
 					</div></>} />
 				</Routes>
 			</div>
 		</BrowserRouter>
 	);
 }
-
 export default App;
