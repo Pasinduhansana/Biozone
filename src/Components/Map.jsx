@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import data from '../Assest/Datafile/classdata.json';
 import { VscArrowRight, VscChromeClose } from "react-icons/vsc";
+import { motion } from "framer-motion";
 
 const Map = () => {
-    // State to control the visibility of the modal and the selected timetable data
+    // State to control the visibility of the modal
     const [selectedTimetable, setSelectedTimetable] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Function to open the modal with the timetable details
+    // Function to open the modal 
     const openModal = (institute) => {
         setSelectedTimetable(institute);
         setIsModalOpen(true);
@@ -81,51 +82,51 @@ const Map = () => {
                             height="600"
                             title="Map"
                         />
+                        <div className="absolute  bg-[#FFFFFF99] backdrop-blur-[5px] lg:p-4 rounded-s-xl w-full lg:w-2/4 lg:h-auto top-1/2 lg:right-3 transform lg:-translate-y-1/2 flex items-center justify-center ">
+                            <div className="lg:w-11/12">
+                                {/* Location Name and Address */}
+                                <div className="text-2xl text-gray-800 mb-4 text-center p-2">
+                                    <div className="font-semibold">{selectedTimetable.locationName}</div>
+                                    <div>
+                                        <p className="mb-2 text-gray-600 lg:text-lg text-sm">{selectedTimetable.address}</p>
+                                    </div>
+                                </div>
 
-<div className="absolute  bg-[#FFFFFF99] backdrop-blur-[5px] lg:p-4 rounded-s-xl w-full lg:w-2/4 lg:h-auto top-1/2 lg:right-3 transform lg:-translate-y-1/2 flex items-center justify-center ">
-    <div className="lg:w-11/12">
-        {/* Location Name and Address */}
-        <div className="text-2xl text-gray-800 mb-4 text-center p-2">
-            <div className="font-semibold">{selectedTimetable.locationName}</div>
-            <div>
-                <p className="mb-2 text-gray-600 lg:text-lg text-sm">{selectedTimetable.address}</p>
-            </div>
-        </div>
-
-        {/* Classes List */}
-        <div>
-            {selectedTimetable.classes.map((classItem, index) => (
-                <div
-                    key={index}
-                    className="flex items-center p-2 rounded-lg m-2 bg-white shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                    {/* Class Details */}
-                    <div className="bg-gradient-to-r from-primary2 to-primary1 text-white p-3 rounded-lg w-2/3">
-                        <div className="flex justify-around">
-                            <div className="flex items-center space-x-5">
-                                <span className="font-medium text-xl">{classItem.classtype}</span>
-                                <span className="font-light text-xl">{classItem.year}</span>
-                                <span className="p-1 border border-solid border-white rounded-md pl-2 pr-2 text-sm">
-                                    {classItem.medium}
-                                </span>
+                                {/* Classes List */}
+                                <div>
+                                    {selectedTimetable.classes.map((classItem, index) => (
+                                        <motion.div
+                                        key={index}
+                                        className="flex items-center p-2 rounded-lg m-2 bg-white shadow-lg hover:shadow-xl "
+                                        initial={{ opacity: 0, x: -100 }} 
+                                        animate={{ opacity: 1, x: 0 }} 
+                                        transition={{ duration: 0.5, ease: "easeOut",  delay: index * 0.2, }} 
+                                      >
+                                            {/* Class Details */}
+                                            <div className="bg-gradient-to-r from-primary2 to-primary1 text-white p-3 rounded-lg w-2/3">
+                                                <div className="flex justify-around">
+                                                    <div className="flex items-center space-x-5">
+                                                        <span className="font-medium text-xl">{classItem.classtype}</span>
+                                                        <span className="font-light text-xl">{classItem.year}</span>
+                                                        <span className="p-1 border border-solid border-white rounded-md pl-2 pr-2 text-sm">
+                                                            {classItem.medium}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* Class Time */}
+                                            <div className="ml-3 text-right text-gray-700">
+                                                <p className="text-base font-normal">{classItem.day}</p>
+                                                <p className="text-xs text-center">{classItem.time}</p>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                                <div className="text-base font-light text-gray-800 mt-4 text-center">
+                                    <div>Times may change due to agile timetable</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {/* Class Time */}
-                    <div className="ml-3 text-right text-gray-700">
-                        <p className="text-base font-normal">{classItem.day}</p>
-                        <p className="text-xs text-center">{classItem.time}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-
-        {/* Footer Note */}
-        <div className="text-base font-light text-gray-800 mt-4 text-center">
-            <div>Times may change due to agile timetable</div>
-        </div>
-    </div>
-</div>
 
                     </div>
                 </div>
