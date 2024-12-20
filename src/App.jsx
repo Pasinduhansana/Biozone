@@ -9,6 +9,7 @@ import Admin from "./Pages/Admin/Admin";
 import Login from "./Pages/Admin/Login";
 import PrivateRoute from "./Utils/PrivateRoute";
 import Map from "./Components/Map";
+import AboutUs from "./Components/AboutUs";
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={
 						<>
+						<AboutUs />
 							<Map />
 							<Advertisement />
 						</>
